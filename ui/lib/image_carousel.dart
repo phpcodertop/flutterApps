@@ -7,8 +7,32 @@ class ImageCarousel extends StatefulWidget {
   State<ImageCarousel> createState() => _ImageCarouselState();
 }
 
-class _ImageCarouselState extends State<ImageCarousel> {
+class _ImageCarouselState extends State<ImageCarousel> with SingleTickerProviderStateMixin {
   int photoIndex = 0;
+  late Animation carouselAnimation;
+  late AnimationController animationController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 18));
+
+    carouselAnimation = IntTween(begin: 0, end: photos.length - 1).animate(animationController)..addListener(() {
+      setState(() {
+        photoIndex = carouselAnimation.value;
+      });
+    });
+
+    animationController.repeat();
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
 
   List<String> photos = [
     'assets/burger1.jpg',
@@ -16,18 +40,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     'assets/burger3.jpg',
     'assets/burger4.jpg',
   ];
-
-  void _previousImage() {
-    setState(() {
-      photoIndex = photoIndex > 0 ? photoIndex - 1 : 0;
-    });
-  }
-
-  void _nextImage() {
-    setState(() {
-      photoIndex = photoIndex < photos.length - 1 ? photoIndex + 1 : photoIndex;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,28 +77,6 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () => _previousImage(),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green),
-                ),
-                child: const Text('Previous'),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              ElevatedButton(
-                onPressed: () => _nextImage(),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
-                ),
-                child: const Text('Next'),
-              ),
-            ],
           ),
         ],
       ),

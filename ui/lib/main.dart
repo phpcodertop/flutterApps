@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'list_titles.dart';
+import 'tutorial_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  ListTitles(),
+      home:  TutorialScreen(),
     );
   }
 }

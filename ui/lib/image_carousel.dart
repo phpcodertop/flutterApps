@@ -40,7 +40,7 @@ class _ImageCarouselState extends State<ImageCarousel> with SingleTickerProvider
     'assets/burger3.jpg',
     'assets/burger4.jpg',
   ];
-  
+
 
   @override
   Widget build(BuildContext context) {

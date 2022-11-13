@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/grid_images.dart';
 import 'package:ui/image_carousel.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  ImageCarousel(),
+      home:  GridImages(),
     );
   }
 }
